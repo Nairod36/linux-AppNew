@@ -1,0 +1,16 @@
+.user {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  .user h2 {
+    color: #333;
+  }
+  
+  .user p {
+    color: #666;
+  }
+  

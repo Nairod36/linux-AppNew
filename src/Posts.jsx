@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Posts.css';
 
 function Posts({ userId }) {
   const [posts, setPosts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axios.get(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
@@ -12,15 +14,18 @@ function Posts({ userId }) {
   }, [userId]);
 
   return (
-    <div>
+    <section className="posts">
       <h3>Articles</h3>
-      {posts.map(post => (
-        <div key={post.id}>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? 'Masquer les articles' : 'Afficher les articles'}
+      </button>
+      {isOpen && posts.map(post => (
+        <article key={post.id}>
           <h4>{post.title}</h4>
           <p>{post.body}</p>
-        </div>
+        </article>
       ))}
-    </div>
+    </section>
   );
 }
 
