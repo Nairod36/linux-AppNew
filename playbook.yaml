@@ -1,0 +1,22 @@
+- name: Setup Dev Environment
+  hosts: localhost
+  tasks:
+    - name: Install Fish and Tmux
+      command: apk add --no-cache fish tmux
+
+    - name: Install Fish Plugins
+      command: fish -c "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+      become: yes
+
+    - name: Set Fish as default shell
+      become: yes
+      lineinfile:
+        path: /etc/passwd
+        regexp: '^root:'
+        line: 'root:x:0:0:root:/root:/usr/bin/fish'
+
+    - name: Install Tmux Plugin Manager
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+      become: yes
